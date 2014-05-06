@@ -53,6 +53,26 @@ body {
 	bottom: 0;
 	z-index:1000000;
 }
+a:link    { color: #cc7833; text-decoration:none; }  /* unvisited links */
+a:visited { color: #cc7833; text-decoration:none; }  /* visited links   */
+a:hover   { color: #bc9448; text-decoration:none; }  /* user hovers     */
+a:active  { color: #ccc; text-decoration:none; }  /* active links    */
+
+#sourcelink {
+	position: absolute;
+	height : 24px;
+	left : 5px;
+	bottom: 5px;
+	z-index:1000000;
+	font-family : 'Arial';
+}
+
+#helplink {
+	position: absolute;
+	right : 125px;
+	bottom : 0;
+	font-family : 'Arial';
+}
 
 #examples {
 	position: absolute;

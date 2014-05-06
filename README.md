@@ -9,3 +9,5 @@ The Epistle to the Implementors.](http://www.hevanet.com/cristofd/brainfuck/epis
 Deadfish is completely awful, I think my interpretation captures that.
 
 As for Befunge, it is a beautiful language, but my interpreter is pretty crappy. Purely an academic exercise. Enjoy! (sarcasm)
+
+[Try it out here - http://josiahhester.com/esolang/](http://josiahhester.com/esolang/)

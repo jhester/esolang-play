@@ -5,6 +5,7 @@
 <script src="main.js"></script>
 <script src="examples.js"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="styles.css">
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
 <div id="editor"># Hello World
@@ -19,15 +20,17 @@
 	</select>
 	<select id="langs" name="Languages">
 		<optgroup label="Languages">
-			<option value="0">Brainf*ck</option>
-			<option value="1">Ook!</option>
-			<option value="2">Befunge</option>
-			<option value="3">Deadfish</option>
+			<option value="0" _href="http://esolangs.org/wiki/Brainfuck">Brainf*ck</option>
+			<option value="1" _href="http://esolangs.org/wiki/ook!">Ook!</option>
+			<option value="2" _href="http://esolangs.org/wiki/Befunge">Befunge</option>
+			<option value="3" _href="http://esolangs.org/wiki/Deadfish">Deadfish</option>
 		</optgroup>
 	</select>
+	<a id="helplink" href="http://esolangs.org/wiki/Brainfuck" target="_blank"><i class="fa fa-external-link"></i> What is Brainf*ck?</a>
 </div>
 <div id="console">
 	<button id="clearbtn">Clear</button>
+	<a id="sourcelink" href="https://github.com/jhester/esolang-play" target="_blank"><i class="fa fa-github"></i> Get the Source-code</a>
 </div>
 
 <script src="lib/jquery.js" type="text/javascript" charset="utf-8"></script>
@@ -68,6 +71,7 @@
 	});
 	
 	$('#langs').change(function() {
+		$("#helplink").html('<i class="fa fa-external-link"></i> What is '+$('#langs option:selected').text()+"?").attr("href", $('#langs option:selected').attr("_href"));
 		populateExamples();	
 		var ndx = parseInt($('#langs').val(), 10);
 		editor.setValue(examples[ndx][0].code);
