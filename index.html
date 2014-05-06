@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Esoteric Languages Playground</title>
+<script src="main.js"></script>
+<script src="examples.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="styles.css">
+</head>
+<body>
+<div id="editor"># Hello World
+++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.
+>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.
+</div>
+<div id="navbar">
+	<button id="runbtn">Run</button>
+	<select id="examples" name="Examples">
+		<optgroup label="Examples">
+		</optgroup>
+	</select>
+	<select id="langs" name="Languages">
+		<optgroup label="Languages">
+			<option value="0">Brainf*ck</option>
+			<option value="1">Ook!</option>
+			<option value="2">Befunge</option>
+			<option value="3">Deadfish</option>
+		</optgroup>
+	</select>
+</div>
+<div id="console">
+	<button id="clearbtn">Clear</button>
+</div>
+
+<script src="lib/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="lib/jqconsole.js" type="text/javascript" charset="utf-8"></script>
+<script src="lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	// Set up the console
+	var jqconsole = $('#console').jqconsole('', '>>> ');
+
+	// Set up the editor
+	var editor = ace.edit("editor");
+	editor.setTheme("ace/theme/idle_fingers");
+	editor.getSession().setMode("ace/mode/python");
+	editor.getSession().setUseWrapMode(true);
+
+	// Handle run button interaction
+	$( "#runbtn" ).click(function() {
+		var ndx = parseInt($('#langs').val(), 10);
+		var interprtr = interpreters[ndx];
+		var output = interprtr.begin(editor.getValue(), jqconsole);
+	});
+	
+	// Clear console button
+	$( "#clearbtn" ).click(function() {
+		jqconsole.Reset();
+	});
+	
+	// Populate the dropdown examples select
+	populateExamples();
+	
+	$('#examples').change(function() {
+		var selectedndx = parseInt($( "#examples option:selected" ).attr('value'), 10);
+		if(selectedndx > -1) {
+			var ndx = parseInt($('#langs').val(), 10);
+			editor.setValue(examples[ndx][selectedndx].code);
+			editor.gotoLine(1);
+		}
+	});
+	
+	$('#langs').change(function() {
+		populateExamples();	
+		var ndx = parseInt($('#langs').val(), 10);
+		editor.setValue(examples[ndx][0].code);
+		editor.gotoLine(1);	
+	});
+	
+	function populateExamples() {
+		var ndx = parseInt($('#langs').val(), 10);
+		var select = $('#examples').find('option').remove().end();
+		for(var i =0;i<examples[ndx].length;i++) {
+			select.append('<option value="'+i+'">--'+examples[ndx][i].name+'</option>');
+		}
+	}
+	 
+	
+</script>
+</body>
+</html>
